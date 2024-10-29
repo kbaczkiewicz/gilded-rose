@@ -8,9 +8,9 @@ class BackstagePassTest extends TestCase
 {
     public function dataProvider(): \Generator
     {
-        yield 'Date far away from gig' => ['Backstage pass', 13, 10, 12, 11];
-        yield 'Date closer from gig' => ['Backstage pass', 11, 10, 10, 12];
-        yield 'Date very close from gig' => ['Backstage pass', 6, 10, 5, 13];
+        yield 'Date far away to gig' => ['Backstage pass', 13, 10, 12, 11];
+        yield 'Date closer to gig' => ['Backstage pass', 10, 10, 9, 12];
+        yield 'Date very close to gig' => ['Backstage pass', 5, 10, 4, 13];
         yield 'Date after gig' => ['Backstage pass', 0, 13, -1, 0];
         yield 'Date in gig day' => ['Backstage pass', 1, 10, 0, 13];
         yield 'Date in gig day with maximum quality' => ['Backstage pass', 1, 50, 0, 50];

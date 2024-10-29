@@ -10,11 +10,11 @@ class BackstagePass extends Item
         $this->sellIn -= 1;
         $this->upgrade(1);
 
-        if ($this->sellIn <= 10) {
+        if ($this->sellIn < 10) {
             $this->upgrade(1);
         }
 
-        if ($this->sellIn <= 5) {
+        if ($this->sellIn < 5) {
             $this->upgrade(1);
         }
 
