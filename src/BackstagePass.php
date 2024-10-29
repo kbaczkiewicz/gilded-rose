@@ -10,15 +10,9 @@ class BackstagePass extends Item
         $this->sellIn -= 1;
         $this->upgrade(1);
 
-        if ($this->sellIn < 10) {
-            $this->upgrade(1);
-        }
+        $this->upgradeAdditionallyForSpecificSellDue();
 
-        if ($this->sellIn < 5) {
-            $this->upgrade(1);
-        }
-
-        if ($this->sellIn < 0) {
+        if ($this->isPastDue()) {
             $this->expire();
         }
     }
@@ -26,5 +20,26 @@ class BackstagePass extends Item
     private function expire(): void
     {
         $this->quality = 0;
+    }
+
+    private function sellDueIsSoon(): bool
+    {
+        return $this->sellIn < 10;
+    }
+
+    private function sellDueIsVerySoon(): bool
+    {
+        return $this->sellIn < 5;
+    }
+
+    private function upgradeAdditionallyForSpecificSellDue(): void
+    {
+        if ($this->sellDueIsSoon()) {
+            $this->upgrade(1);
+        }
+
+        if ($this->sellDueIsVerySoon()) {
+            $this->upgrade(1);
+        }
     }
 }

@@ -28,9 +28,14 @@ abstract class Item
         return $this->quality;
     }
 
+    public function __toString()
+    {
+        return "{$this->name}, {$this->sellIn}, {$this->quality}";
+    }
+
     protected function upgrade(int $quality): void
     {
-        $this->quality = min($this->quality + $quality, 50);
+        $this->quality = min($this->quality + $quality, self::MAXIMUM_QUALITY);
     }
 
     protected function degrade(int $quality): void
@@ -38,8 +43,8 @@ abstract class Item
         $this->quality = max($this->quality - $quality, 0);
     }
 
-    public function __toString()
+    protected function isPastDue(): bool
     {
-        return "{$this->name}, {$this->sellIn}, {$this->quality}";
+        return $this->sellIn < 0;
     }
 }

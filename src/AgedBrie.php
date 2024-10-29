@@ -13,12 +13,9 @@ class AgedBrie extends Item
     public function advance(): void
     {
         $this->sellIn -= 1;
-        if ($this->quality < 50) {
-            if ($this->sellIn < 0) {
-                $this->upgrade(2);
-            } else {
-                $this->upgrade(1);
-            }
+        $this->upgrade(1);
+        if ($this->isPastDue()) {
+            $this->upgrade(1);
         }
     }
 }
