@@ -33,6 +33,11 @@ abstract class Item
 
     protected function degrade(int $quality): void
     {
-        $this->quality -= $quality;
+        $this->quality = max($this->quality - $quality, 0);
+    }
+
+    public function __toString()
+    {
+        return "{$this->name}, {$this->sellIn}, {$this->quality}";
     }
 }

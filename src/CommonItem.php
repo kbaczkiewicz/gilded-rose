@@ -6,7 +6,14 @@ final class CommonItem extends Item
 {
     public function advance(): void
     {
-        // TODO: Implement advance() method.
+        $this->sellIn -= 1;
+        if ($this->quality < 50) {
+            if ($this->sellIn < 0) {
+                $this->degrade(2);
+            } else {
+                $this->degrade(1);
+            }
+        }
     }
 
     public function setSellIn(int $sellIn): void
@@ -17,10 +24,5 @@ final class CommonItem extends Item
     public function setQuality(int $quality): void
     {
         $this->quality = $quality;
-    }
-
-    public function __toString()
-    {
-        return "{$this->name}, {$this->sellIn}, {$this->quality}";
     }
 }
