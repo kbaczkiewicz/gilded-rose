@@ -4,6 +4,7 @@ namespace App;
 
 abstract class Item
 {
+    protected const MAXIMUM_QUALITY = 50;
     public function __construct(protected readonly string $name, protected int $sellIn, protected int $quality)
     {
     }
@@ -27,7 +28,7 @@ abstract class Item
 
     protected function upgrade(int $quality): void
     {
-        $this->quality += $quality;
+        $this->quality = min($this->quality + $quality, 50);
     }
 
     protected function degrade(int $quality): void

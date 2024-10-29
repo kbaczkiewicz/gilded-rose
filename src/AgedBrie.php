@@ -20,9 +20,4 @@ class AgedBrie extends Item
             }
         }
     }
-
-    protected function upgrade(int $quality): void
-    {
-        $this->quality = min($this->quality + $quality, 50);
-    }
 }
