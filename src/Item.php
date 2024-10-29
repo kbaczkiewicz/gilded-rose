@@ -1,10 +1,12 @@
 <?php
 declare(strict_types=1);
+
 namespace App;
 
 abstract class Item
 {
     protected const MAXIMUM_QUALITY = 50;
+
     public function __construct(protected readonly string $name, protected int $sellIn, protected int $quality)
     {
     }
