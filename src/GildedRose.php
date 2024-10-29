@@ -4,7 +4,7 @@ namespace App;
 
 final class GildedRose
 {
-    public function updateQuality(Item $item): void
+    public function updateQuality(CommonItem $item): void
     {
         if ($item->getName() != 'Aged Brie' and $item->getName() != 'Backstage passes to a TAFKAL80ETC concert') {
             if ($item->getQuality() > 0) {

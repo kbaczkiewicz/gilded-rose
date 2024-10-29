@@ -2,11 +2,13 @@
 declare(strict_types=1);
 namespace App;
 
-final class Item
+abstract class Item
 {
-    function __construct(private readonly string $name, private int $sellIn, private int $quality)
+    public function __construct(protected readonly string $name, protected int $sellIn, protected int $quality)
     {
     }
+
+    abstract public function advance(): void;
 
     public function getName(): string
     {
@@ -18,23 +20,18 @@ final class Item
         return $this->sellIn;
     }
 
-    public function setSellIn(int $sellIn): void
-    {
-        $this->sellIn = $sellIn;
-    }
-
     public function getQuality(): int
     {
         return $this->quality;
     }
 
-    public function setQuality(int $quality): void
+    protected function upgrade(int $quality): void
     {
-        $this->quality = $quality;
+        $this->quality += $quality;
     }
 
-    public function __toString()
+    protected function degrade(int $quality): void
     {
-        return "{$this->name}, {$this->sellIn}, {$this->quality}";
+        $this->quality -= $quality;
     }
 }

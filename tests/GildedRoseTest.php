@@ -1,7 +1,7 @@
 <?php
 
 use App\GildedRose;
-use App\Item;
+use App\CommonItem;
 use PHPUnit\Framework\TestCase;
 
 class GildedRoseTest extends TestCase
@@ -16,7 +16,7 @@ class GildedRoseTest extends TestCase
         int $expectedSellIn,
         int $expectedQuality
     ): void {
-        $item = new Item($name, $sellIn, $quality);
+        $item = new CommonItem($name, $sellIn, $quality);
 
         $gildedRose = new GildedRose();
         $gildedRose->updateQuality($item);
