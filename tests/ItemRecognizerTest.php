@@ -38,7 +38,7 @@ class ItemRecognizerTest extends TestCase
      */
     public function testRecognizedItemsHasCorrectType(CommonItem $item, string $type): void
     {
-        $this->recognizer->recognize($item);
+        $item = $this->recognizer->recognize($item);
         $this->assertEquals($type, $item::class);
     }
 }

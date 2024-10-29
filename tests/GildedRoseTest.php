@@ -2,6 +2,10 @@
 
 use App\GildedRose;
 use App\CommonItem;
+use App\Recognizer\AgedBrieByNameRecognizer;
+use App\Recognizer\BackstagePassByNameRecognizer;
+use App\Recognizer\ItemRecognizer;
+use App\Recognizer\SulfurasByNameRecognizer;
 use PHPUnit\Framework\TestCase;
 
 class GildedRoseTest extends TestCase
@@ -18,8 +22,14 @@ class GildedRoseTest extends TestCase
     ): void {
         $item = new CommonItem($name, $sellIn, $quality);
 
-        $gildedRose = new GildedRose();
-        $gildedRose->updateQuality($item);
+        $recognizer = new ItemRecognizer([
+            new AgedBrieByNameRecognizer(),
+            new SulfurasByNameRecognizer(),
+            new BackstagePassByNameRecognizer()
+        ]);
+
+        $gildedRose = new GildedRose($recognizer);
+        $item = $gildedRose->updateQuality($item);
 
         $this->assertEquals($expectedSellIn, $item->getSellIn());
         $this->assertEquals($expectedQuality, $item->getQuality());

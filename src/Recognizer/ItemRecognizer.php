@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Recognizer;
 
 use App\CommonItem;
+use App\Item;
 
 class ItemRecognizer
 {
@@ -14,14 +15,14 @@ class ItemRecognizer
     {
     }
 
-    public function recognize(CommonItem &$item): void
+    public function recognize(CommonItem $item): Item
     {
         foreach ($this->recognizers as $recognizer) {
             if ($recognizer->canRecognize($item)) {
-                $item = $recognizer->recognize($item);
-
-                return;
+                return $recognizer->recognize($item);
             }
         }
+
+        return $item;
     }
 }
